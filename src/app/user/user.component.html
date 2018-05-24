@@ -1,0 +1,116 @@
+<!--<div class="col-md-6">
+  <h2> User Details</h2>
+
+  <table class="table table-striped">
+      <th class="hidden">Id</th>
+      <th>FirstName</th>
+      <th>Content</th>
+      <th>Email</th>
+      <th>LastName</th>
+      <th>Action</th>
+    <tr *ngFor="let record of character; let myIndex= index;">
+      <td>{{myIndex + 0}}</td>
+      <td>{{record.firstName}}</td><td>{{record.content}}</td>
+      <td>{{record.email}}</td><td>{{record.lastName}}</td>
+      <td><button class="btn btn-danger" (click)="deleteUser(record.firstName, myIndex)"> Delete User</button></td>
+    </tr>
+    <td><button class="btn btn-danger" (click)="createUser()"> Create User</button></td>
+  </table>
+</div>-->
+<!--<div class="col-md-6">
+  <h2> User Details</h2>
+
+  <table class="table table-striped">
+    <th class="hidden">Id</th>
+    <th>FirstName</th>
+    <th>Content</th>
+    <th>Email</th>
+    <th>LastName</th>
+    <th>Action</th>
+    <tr *ngFor="let record of users; let myIndex= index;"><td>{{myIndex + 0}}</td>
+      <td>{{record.firstName[0]}}</td><td>{{record.content[0]}}</td><td>{{record.email[0]}}</td><td>{{record.lastName[0]}}</td>
+    <tr *ngFor="let record of users; let myIndex= index;"><td>{{myIndex + 1}}</td>
+      <td>{{record.firstName[1]}}</td><td>{{record.content[1]}}</td><td>{{record.email[1]}}</td><td>{{record.lastName[1]}}</td>
+    <tr *ngFor="let record of users; let myIndex= index;"><td>{{myIndex + 2}}</td>
+      <td>{{record.firstName}}</td><td>{{record.content}}</td><td>{{record.email}}</td><td>{{record.lastName}}</td>
+    <tr *ngFor="let record of users; let myIndex= index;"><td>{{myIndex + 3}}</td>
+    </tr>
+    <td><button class="btn btn-danger" (click)="deleteUser(user)"> Delete User</button></td>
+    <td><button class="btn btn-danger" (click)="createUser()"> Create User</button></td>
+  </table>
+</div>-->
+
+<div class="example-container mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef > FirstName </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="content">
+      <th mat-header-cell *matHeaderCellDef> Content </th>
+      <td mat-cell *matCellDef="let element"> {{element.content}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> LastName </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <!-- action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button (click)="deleteUser(element.firstName)">
+        Supprimer</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+
+  </table>
+  <div>
+    <table>
+      <tr>
+        <button mat-raised-button (click)="delete()">
+          Supprimer</button> <button mat-raised-button (click)="createUser()">
+        Ajouter</button>
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+
+</div>
